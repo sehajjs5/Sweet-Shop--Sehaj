@@ -12,7 +12,7 @@ export default function Register() {
     e.preventDefault();
     try {
       await register(username, email, password);
-      navigate("/login");
+      navigate("/login", { replace: true });
     } catch {
       setError("Failed to register. Please try again.");
     }
