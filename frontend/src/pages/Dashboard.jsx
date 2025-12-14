@@ -1,7 +1,7 @@
 import useAuth from "../context/useAuth";
 import api from "../api/axios";
 import { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const [sweets, setSweets] = useState([]);
@@ -19,6 +19,12 @@ const Dashboard = () => {
   const [searchCategory, setSearchCategory] = useState("");
   const [editingSweet, setEditingSweet] = useState(null);
   const [newPrice, setNewPrice] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   const applySearch = async () => {
     try {
@@ -197,7 +203,7 @@ const Dashboard = () => {
         <div className="flex items-center gap-4">
           <span>{user?.name}</span>
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="bg-black text-white p-4 rounded-xl cursor-pointer hover:bg-gray-900"
           >
             Logout
