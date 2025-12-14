@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [sweets, setSweets] = useState([]);
   const [loading, setLoading] = useState(true);
   const isAdmin = user?.role === "ADMIN";
+  const isUser = user?.role === "USER";
   const [showAdd, setShowAdd] = useState(false);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -245,18 +246,20 @@ const Dashboard = () => {
               <p className="mt-2">₹ {sweet.price}</p>
               <p className="text-sm">Stock: {sweet.quantity}</p>
             </div>
+            {isUser && (
+              <button
+                disabled={sweet.quantity === 0}
+                onClick={() => purchaseSweet(sweet)}
+                className={`mt-4 py-2 rounded ${
+                  sweet.quantity === 0
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-green-600 text-white"
+                }`}
+              >
+                {sweet.quantity === 0 ? "Out of Stock" : "Purchase"}
+              </button>
+            )}
 
-            <button
-              disabled={sweet.quantity === 0}
-              onClick={() => purchaseSweet(sweet)}
-              className={`mt-4 py-2 rounded ${
-                sweet.quantity === 0
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-green-600 text-white"
-              }`}
-            >
-              {sweet.quantity === 0 ? "Out of Stock" : "Purchase"}
-            </button>
             {isAdmin && (
               <div className="flex gap-2 mt-3">
                 <button
