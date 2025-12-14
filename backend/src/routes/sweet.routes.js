@@ -14,7 +14,7 @@ const {
 } = require("../controllers/sweet.controller");
 
 router.get("/", getAllSweets);
-router.get("/search", searchSweets);
+router.get("/search", auth, searchSweets);
 
 router.post("/", auth, admin, createSweets);
 router.put("/:id", auth, admin, updateSweet);
