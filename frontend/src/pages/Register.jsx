@@ -9,9 +9,8 @@ export default function Register() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
-
       await register(username, email, password);
       navigate("/login");
     } catch {
@@ -47,7 +46,6 @@ export default function Register() {
           />
           <button
             type="submit"
-            onSubmit={handleSubmit}
             className="bg-black text-white p-4 rounded-xl w-full cursor-pointer hover:bg-gray-900"
           >
             Register
