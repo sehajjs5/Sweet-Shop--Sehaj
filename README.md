@@ -16,7 +16,7 @@ Go to frontend folder and open a new terminal
 Run npm i - this will install all the dependencies
 Run npm run dev
 
-The project should be up and running now. I have also deployed it at:
+The project should be up and running now. I have also deployed it at: https://sweet-shop-sehaj.onrender.com/
 
 First you need to register with your email id, then login with the same email and password. This will give you access as a user.
 
