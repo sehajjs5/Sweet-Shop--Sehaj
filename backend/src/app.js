@@ -3,6 +3,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth.routes");
 const sweetRoutes = require("./routes/sweet.routes");
 const errorMiddleware = require("./middleware/error.middleware");
+
 const app = express();
 
 app.use(express.json());
