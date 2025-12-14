@@ -147,9 +147,9 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 ">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6 bg-white shadow p-4 rounded">
+      <div className="flex justify-between items-center mb-6  shadow p-4 rounded">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-fuchsia-400 to-purple-800 bg-clip-text text-transparent">
           AI Kata Sweet Shop by Sehaj
         </h1>
@@ -204,7 +204,7 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-      <div className="bg-white p-4 rounded shadow mb-6 grid grid-cols-1 md:grid-cols-5 gap-3">
+      <div className=" p-4 rounded shadow mb-6 grid grid-cols-1 md:grid-cols-5 gap-3">
         <input
           type="text"
           placeholder="Search name"
