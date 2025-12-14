@@ -17,6 +17,8 @@ const Dashboard = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [searchName, setSearchName] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
+  const [editingSweet, setEditingSweet] = useState(null);
+  const [newPrice, setNewPrice] = useState("");
 
   const applySearch = async () => {
     try {
@@ -40,7 +42,20 @@ const Dashboard = () => {
     setMaxPrice("");
     fetchSweets();
   };
-
+  const updatePrice = async () => {
+    if (!newPrice || isNaN(newPrice) || Number(newPrice) <= 0) {
+      alert("Enter valid price");
+      return;
+    }
+    try {
+      await api.put(`/sweets/${editingSweet._id}`, { price: Number(newPrice) });
+      setEditingSweet(null);
+      fetchSweets();
+      alert("Price updated successfully");
+    } catch {
+      alert("Update failed");
+    }
+  };
   const fetchSweets = async () => {
     try {
       const res = await api.get("/sweets");
@@ -263,6 +278,16 @@ const Dashboard = () => {
             {isAdmin && (
               <div className="flex gap-2 mt-3">
                 <button
+                  onClick={() => {
+                    setEditingSweet(sweet);
+                    setNewPrice(sweet.price);
+                  }}
+                  className="bg-blue-500 text-white px-3 py-1 rounded"
+                >
+                  Edit Price
+                </button>
+
+                <button
                   onClick={() => deleteSweet(sweet._id)}
                   className="bg-red-500 text-white px-3 py-1 rounded"
                 >
@@ -280,6 +305,38 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+      {editingSweet && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <div className="bg-white p-6 rounded w-80 space-y-4">
+            <h2 className="text-lg font-semibold">
+              Edit Price – {editingSweet.name}
+            </h2>
+
+            <input
+              type="number"
+              value={newPrice}
+              onChange={(e) => setNewPrice(e.target.value)}
+              className="border p-2 w-full rounded"
+            />
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setEditingSweet(null)}
+                className="px-3 py-1 bg-gray-400 text-white rounded"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={updatePrice}
+                className="px-3 py-1 bg-green-600 text-white rounded"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
