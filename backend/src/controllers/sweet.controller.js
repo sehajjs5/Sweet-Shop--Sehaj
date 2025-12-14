@@ -1,4 +1,4 @@
-const Sweet = require("../models/sweet");
+const Sweet = require("../models/Sweet");
 
 exports.createSweets = async (req, res) => {
   try {
