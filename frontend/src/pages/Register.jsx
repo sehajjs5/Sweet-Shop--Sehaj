@@ -13,7 +13,7 @@ export default function Register() {
       e.preventDefault();
 
       await register(username, email, password);
-      window.location.href = "/login";
+      navigate("/login");
     } catch {
       setError("Failed to register. Please try again.");
     }
