@@ -121,7 +121,7 @@ exports.restockSweet = async (req, res) => {
     if (!quantity || quantity <= 0) {
       return res.status(400).json({ message: "Invalid restock quantity" });
     }
-    sweet.quantity += quantity;
+    sweet.quantity = quantity;
     await sweet.save();
     res.status(200).json({ message: "Restock successful", sweet });
   } catch (error) {

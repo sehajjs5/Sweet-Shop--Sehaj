@@ -108,7 +108,7 @@ const Dashboard = () => {
   };
 
   const restockSweet = async (id) => {
-    const qty = prompt("Enter restock quantity");
+    const qty = prompt("Enter new stock quantity");
     if (!qty) return;
 
     try {
