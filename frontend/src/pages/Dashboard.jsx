@@ -12,6 +12,33 @@ const Dashboard = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [qty, setQty] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [searchCategory, setSearchCategory] = useState("");
+
+  const applySearch = async () => {
+    try {
+      const res = await api.get("/sweets/search", {
+        params: {
+          name: searchName || undefined,
+          category: searchCategory || undefined,
+          minPrice: minPrice || undefined,
+          maxPrice: maxPrice || undefined,
+        },
+      });
+      setSweets(res.data);
+    } catch {
+      alert("Search failed");
+    }
+  };
+  const resetSearch = () => {
+    setSearchName("");
+    setSearchCategory("");
+    setMinPrice("");
+    setMaxPrice("");
+    fetchSweets();
+  };
 
   const fetchSweets = async () => {
     try {
@@ -157,7 +184,54 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
+      <div className="bg-white p-4 rounded shadow mb-6 grid grid-cols-1 md:grid-cols-5 gap-3">
+        <input
+          type="text"
+          placeholder="Search name"
+          value={searchName}
+          onChange={(e) => setSearchName(e.target.value)}
+          className="border p-2 rounded"
+        />
 
+        <input
+          type="text"
+          placeholder="Category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="border p-2 rounded"
+        />
+
+        <input
+          type="number"
+          placeholder="Min price"
+          value={minPrice}
+          onChange={(e) => setMinPrice(e.target.value)}
+          className="border p-2 rounded"
+        />
+
+        <input
+          type="number"
+          placeholder="Max price"
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+          className="border p-2 rounded"
+        />
+
+        <div className="flex gap-2">
+          <button
+            onClick={applySearch}
+            className="bg-blue-600 text-white px-3 py-2 rounded"
+          >
+            Search
+          </button>
+          <button
+            onClick={resetSearch}
+            className="bg-gray-400 text-white px-3 py-2 rounded"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
       {/* Sweet Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {sweets.map((sweet) => (
