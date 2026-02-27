@@ -1,6 +1,8 @@
 This is a project of AI Sweet Shop. I have created backend using the below listed technologies:
 
-- Node.JS
+- Node.JS, ReactJS
+
+The backend takes some time to load that is why the frontend takes time to give results. Please wait some time after going to the website or first wake up the server by going to the backend url: https://sweet-shop-sehaj-backend.onrender.com/
 
 The libraries used are cors, expressJS, mongoDB.
 
