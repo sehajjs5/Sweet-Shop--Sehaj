@@ -10,7 +10,9 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Login started");
       await login(email, password);
+      console.log("Login successful");
       window.location.href = "/";
     } catch {
       setError("Failed to login. Please check your credentials.");

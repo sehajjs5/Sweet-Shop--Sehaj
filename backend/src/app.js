@@ -11,6 +11,8 @@ app.use(cors());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/sweets", sweetRoutes);
-
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 app.use(errorMiddleware);
 module.exports = app;
